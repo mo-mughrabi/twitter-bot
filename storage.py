@@ -7,5 +7,5 @@ class S3StaticBucket(S3BotoStorage):
     def __init__(self, *args, **kwargs):
         kwargs['bucket'] = getattr(settings, 'AWS_STORAGE_BUCKET_NAME')
         kwargs['secure_urls'] = False
-        kwargs['AWS_LOCATION'] = 'static/'
+        kwargs['location'] = 'static/'
         super(S3StaticBucket, self).__init__(*args, **kwargs)
