@@ -1,8 +1,8 @@
 Introduction
 -----
 
-Twit bot is an open source software, I decided to do this project in 5 days. A small portal to allow users to sign up
-via twitter and do following
+Twit bot is an open source software, I decided to do this project in 1 week as a benchmark for myself. A small portal
+to allow users to sign up via twitter and do following
 
     1) Auto follow certain hashtags
     2) Auto favorite certain hashtags
