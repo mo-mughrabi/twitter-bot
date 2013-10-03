@@ -4,6 +4,7 @@ PIL==1.1.7
 amqp==1.0.13
 anyjson==0.3.3
 billiard==2.7.3.32
+boto==2.13.3
 celery==3.0.23
 dj-database-url==0.2.2
 django-celery==3.0.23
