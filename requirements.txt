@@ -8,6 +8,7 @@ celery==3.0.23
 dj-database-url==0.2.2
 django-celery==3.0.23
 django-social-auth==0.7.28
+django-storages==1.1.8
 django-suit==0.2.5
 ecdsa==0.9
 gunicorn==18.0
