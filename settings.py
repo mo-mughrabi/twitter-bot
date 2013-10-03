@@ -83,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ')evz0)z+&*%=^ay(7$8yht687kz)shn*$w@0#_2w_#!h!-^t^k'
+SECRET_KEY = os.environ.get('SECRET_KEY', ')evz0)z+&*%=^ay(7$8yht687kz)shn*$w@0#_2w_#!h!-^t^k')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -130,7 +130,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'storages',
+    'south',
     'social_auth',
+    'apps.dbmanager',
     'apps.account',
     'apps.twitter',
 )

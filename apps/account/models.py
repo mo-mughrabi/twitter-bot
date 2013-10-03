@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from binascii import hexlify
+from django.db.models.signals import post_syncdb
 import os
 import random
 import re
