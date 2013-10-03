@@ -121,10 +121,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'suit',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'storages',
     'apps.account',
     'apps.twitter',
 )
@@ -159,6 +161,15 @@ LOGGING = {
         },
     }
 }
+
+try:
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STATIC_STORAGE_BUCKET_NAME')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'libs.storage.S3StaticBucket'
+except :
+    pass
 
 try:
     from local_env import *
