@@ -1,0 +1,140 @@
+.fmc-container {
+    padding-top: 3em;
+}
+
+.fmc-big-head h1 {
+    font-size: 6em;
+    font-weight: bold;
+    letter-spacing: -4px;
+    color: #444444;
+    font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+.fmc-big-email h2 {
+    font-size: 2em;
+    color: #0088CC;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-shadow: 0 1px 0 #AAAAAA;
+    font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+.fmc-content {
+    margin-top: 2em;
+}
+
+.fmc-welcome img {
+    box-shadow: 0 5px 5px #AAAAAA;
+    margin-left: 10px;
+}
+
+.fmc-welcome p {
+    font-size: 1.4em;
+    line-height: 1.4em;
+}
+
+.fmc-welcome {
+    margin-top: 1em;
+    padding-bottom: 10px;
+    border-bottom: #AAAAAA dotted 1px;
+}
+
+.footer {
+    margin-top: 2em;
+    border-top: #AAAAAA dotted 1px;
+    font-family: "Arial";
+    padding-top: 5px;
+    font-size: 0.7em;
+}
+
+.welcome-blocks {
+    margin-top: 2em;
+}
+
+.nav {
+
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.resume h3 {
+    color: #0e90d2;
+}
+
+.resume em {
+    color: #555555;
+}
+
+/*.recommendations h1 {*/
+/*border-top: #AAAAAA dotted 1px;*/
+/*}*/
+.tab {
+    margin-left: 1em;
+}
+
+.projects em {
+    color: #555555;
+    font-size: .9em;
+}
+
+.projects h3 {
+    color: #0e90d2;
+    margin-bottom: -4px;
+}
+
+.left-paragraphs > p {
+    text-align: left;
+}
+
+.col-lg-4 {
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.img-float {
+    float: left;
+    padding-right: 7px;
+    padding-top: 5px;
+}
+
+.text-muted a {
+    color: #999999;
+}
+
+.text-muted a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+.jumbotron-small {
+    padding: 0px 0px 0px 0px !important;
+    margin-bottom: 0px;
+}
+.jumbotron-small h2 {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.article pre {
+    background-color: white !important;
+    border: none !important;
+    border-radius: 0px 0px 0px 0px !important;
+}
+.article header {
+    width: 100%;
+    display: table;
+}
+.article p {
+    
+}
+
+.article .date {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #EEEEEE;
+}
+.article .page-header {
+    padding-bottom: 0px;
+}
+.article .text-muted {
+    text-transform: uppercase;
+}

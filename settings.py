@@ -1,10 +1,8 @@
 # Django settings for twit_bot project / more documentation to be written
 import dj_database_url
 import os
-import sys
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                        os.path.pardir, os.path.pardir))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ))
 
 
 def base(f=''):
@@ -15,7 +13,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-# ('Your Name', 'your_email@example.com'),
+    # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
