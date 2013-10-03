@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+from django.conf.urls import patterns, url, include
+from views import Signup, Logout, Verify, CompleteProfile
+
+urlpatterns = patterns('',
+    url(r'^sign-up/$', Signup.as_view(), name='account-signup'),
+    url(r'^logout/$', Logout.as_view(), name='account-logout'),
+    url(r'^verify/(?P<verification_code>[-\w]+)/$', Verify.as_view(), name='account-verify'),
+    url(r'^complete-profile/$', CompleteProfile.as_view(), name='account-complete-profile'),
+)
+
+urlpatterns += patterns('',
+                        url(r'', include('social_auth.urls'))
+)

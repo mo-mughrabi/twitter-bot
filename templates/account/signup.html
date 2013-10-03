@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block centraal_content %}
+      <div class="jumbotron">
+
+        <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-primary btn-lg pull-right">{% trans 'Sign up' %} <i class="glyphicon glyphicon-arrow-right"></i> </a>
+        <p>{% trans 'In order to sign up, click on the button below to authorize your twitter account' %}</p>
+
+      </div>
+{% endblock %}

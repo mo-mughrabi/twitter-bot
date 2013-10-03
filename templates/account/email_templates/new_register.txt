@@ -1,0 +1,11 @@
+{% load i18n %}
+
+
+{% trans 'Hello' %},
+
+
+Allow us to thank you for visiting twit-robo.mocorner.com and registering with us. Please {{ protocol }}://{{ domain }}{{ activation_link }} the following link to activate your account.
+
+
+Best wishes,
+Twit Robo

@@ -114,6 +114,9 @@ TEMPLATE_DIRS = (
     base('templates')
 )
 
+# custom user model
+AUTH_USER_MODEL = 'account.User'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,6 +130,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'storages',
+    'social_auth',
     'apps.account',
     'apps.twitter',
 )
@@ -161,6 +165,52 @@ LOGGING = {
         },
     }
 }
+
+# context processor
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+)
+
+# authentication backends
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TWITTER_EXTRA_DATA = [
+    ('screen_name', 'screen_name'),
+    ('user_info', 'user_info')
+]
+
+SOCIAL_AUTH_PIPELINE = (
+    'apps.account.pipeline.social_auth_user',  # to handle is_active = False as suspended user
+    'social_auth.backends.pipeline.associate.associate_by_email',
+    'social_auth.backends.pipeline.misc.save_status_to_session',
+    'apps.account.pipeline.redirect_to_form',
+    'apps.account.pipeline.set_username',
+    'social_auth.backends.pipeline.user.create_user',
+    'social_auth.backends.pipeline.social.associate_user',
+    'social_auth.backends.pipeline.social.load_extra_data',
+    'apps.account.pipeline.update_email_validity',
+    'apps.account.pipeline.set_user_details',
+    'apps.account.pipeline.social_extra_data',
+    'apps.account.pipeline.destroy_session_data',
+)
+
+SOCIAL_AUTH_PARTIAL_PIPELINE_KEY = 'partial_pipeline'
+
+# for django-orm-extensions to not conflict with south
+SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
+
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', '')
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', '')
 
 try:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STATIC_STORAGE_BUCKET_NAME')

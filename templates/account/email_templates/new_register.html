@@ -1,0 +1,14 @@
+{% extends 'email_base/base.html' %}
+{% load i18n %}
+
+
+{% block body %}
+{% trans 'Hello' %},
+<br />
+<br />
+    <p>Allow us to thank you for visiting twit-robo.mocorner.com and registering with us. Please <a href="{{ protocol }}://{{ domain }}{{ activation_link }}">click</a> the following link to activate your account.</p>
+<br />
+
+Best wishes,
+Twit Robo
+{% endblock %}
