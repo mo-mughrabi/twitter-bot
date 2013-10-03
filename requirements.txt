@@ -1,0 +1,7 @@
+Django==1.5.4
+praw==2.1.8
+requests==2.0.0
+six==1.4.1
+tweepy==2.1
+update-checker==0.6
+wsgiref==0.1.2
