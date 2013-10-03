@@ -1,0 +1,112 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% trans 'Twit Robo' %}</title>
+</head>
+<body style="background-color:#e6e6e6; margin:0px; padding:0px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#e6e6e6; font-family:Arial, Helvetica, sans-serif;">
+  <!--HEADER CONTAINER STARTS-->
+  <tr>
+    <td align="center"><!--HEADER STARTS-->
+      <table align="center" width="600" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center" height="27" colspan="2">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td height="7" colspan="2"></td>
+        </tr>
+      </table>
+      <!--HEADER ENDS--></td>
+  </tr>
+  <!--HEADER CONTAINER ENDS-->
+  <!--MID CONTAINER STARTS-->
+  <tr>
+    <td><table width="620" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td height="14" align="center" valign="bottom" colspan="3"><img valign="bottom" src="{{ STATIC_URL }}images/email-templates/top_sh.png" width="602" height="40" /></td>
+        </tr>
+        <tr>
+          <td class="lsh" width="10" align="right" valign="top"></td>
+          <td width="600" align="center" valign="top" style="background-color:#FFFFFF; border:solid 1px #d8d8d4; border-width:0px 1px 0px;">
+          <!--CONTENT SECTION STARTS-->
+            <table align="center" width="570" height="90" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+              	<!--Section Title-->
+                <td valign="middle" align="left"></td>
+                <td valign="middle" align="right">
+
+                </td>
+              </tr>
+            </table>
+            <table width="600" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+              <!--Full Width Banner Image-->
+                <td>
+                </td>
+              </tr>
+            </table>
+            <table width="570" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="30" colspan="5"></td>
+              </tr>
+              <tr>
+                <td width="10"></td>
+                <!--Info Text-->
+                <td align="left" width="315" style="font-size:12px; color:#949494; line-height:18px;">
+                    {% block body %}{% endblock %}
+                </td>
+              </tr>
+              <tr>
+                <td height="20" colspan="5" ></td>
+              </tr>
+            </table>
+          </td>
+          <td class="rsh" width="9" align="left" valign="bottom"></td>
+        </tr>
+        <tr>
+          <td height="14" align="center" valign="top" colspan="3"><img src="{{ STATIC_URL }}images/email-templates/bottom_sh.png" width="602" height="14" /></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!--MID CONTAINER ENDS-->
+  <!--FOOTER CONTAINER STARTS-->
+  <tr>
+    <td><!--FOOTER STARTS-->
+      <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td height="15"></td>
+        </tr>
+        <tr>
+          <td height="67" align="center" valign="middle" style="background-color:#d4d4d4; border-top:solid 1px #b3b3b3; border-bottom:solid 1px #b3b3b3;">
+          <table width="600" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="10">&nbsp;</td>
+                <td width="285">
+                <!--Footer Logo - Copyright-->
+                <table width="285" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="left" valign="middle" style="font-size:12px; color:#232628; line-height:16px;"> {% trans 'Copyright © 2013' %} <br />
+                        <a href="{{ CURRENT_SITE.domain }}">{% trans 'Twit Robo' %}</a>
+                        </td>
+                    </tr>
+                  </table></td>
+                <td align="right" valign="middle">
+                </td>
+                <td width="10">&nbsp;</td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td height="10" style="background-color:#272727;"></td>
+        </tr>
+      </table>
+      <!--FOOTER ENDS--></td>
+  </tr>
+  <!--FOOTER CONTAINER ENDS-->
+</table>
+</body>
+</html>

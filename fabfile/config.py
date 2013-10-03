@@ -16,5 +16,8 @@ def load_configs_to_heroku():
                                        config.get('Config', 'AWS_STATIC_STORAGE_BUCKET_NAME')))
     local('heroku config:set %s=%s' % ('SECRET_KEY', config.get('Config', 'SECRET_KEY')))
     local('heroku config:set %s=%s' % ('STATIC_URL', config.get('Config', 'STATIC_URL')))
+    # twitter keys
+    local('heroku config:set %s=%s' % ('TWITTER_CONSUMER_KEY', config.get('Config', 'TWITTER_CONSUMER_KEY')))
+    local('heroku config:set %s=%s' % ('TWITTER_CONSUMER_SECRET', config.get('Config', 'TWITTER_CONSUMER_SECRET')))
 
 

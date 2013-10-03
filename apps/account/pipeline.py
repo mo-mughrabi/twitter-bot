@@ -47,7 +47,7 @@ def social_auth_user(backend, uid, user=None, *args, **kwargs):
 def redirect_to_form(*args, **kwargs):
     """ """
     # new user
-    if not kwargs['request'].session.get('saved_username') and kwargs.get('user') is None:
+    if not kwargs['request'].session.get('saved_email') and kwargs.get('user') is None:
         return HttpResponseRedirect(reverse('account-complete-profile'))
 
 
@@ -56,7 +56,8 @@ def set_username(request, *args, **kwargs):
     if kwargs.get('user'):
         username = kwargs['user'].username
     else:
-        username = request.session.get('saved_username')
+        user = User.objects.all().order_by("-id")[0]
+        username = 'auto%s' % str(user.id)
     return {'username': username}
 
 
@@ -64,31 +65,26 @@ def set_user_details(request, *args, **kwargs):
     """ """
     if kwargs['is_new']:
         user = kwargs['user']
-        if 'saved_full_name' in request.session:
-            user.full_name = request.session.get('saved_full_name')
-            user.save()
-        # if email is provided by user
-        elif 'saved_email' in request.session:
-            user.email = request.session.get('saved_email')
-            user.save()
+        user.email = request.session.get('saved_email')
+        user.save()
 
-            html = get_template('account/email_templates/new_register.html')
-            txt = get_template('account/email_templates/new_register.txt')
+        html = get_template('account/email_templates/new_register.html')
+        txt = get_template('account/email_templates/new_register.txt')
 
-            c = Context({
-                'user': user.username,
-                'activation_link': user.get_activation_url(),
-                'domain': request.META['HTTP_HOST'],
-                'protocol': 'https' if request.is_secure() else 'http',
-                'STATIC_URL_THEME': getattr(settings, 'STATIC_URL_THEME')
-            })
-            msg = EmailMultiAlternatives(_('Welcome to Khooosh'), txt.render(c), 'info@khooosh.com', [user.email, ])
-            msg.attach_alternative(html.render(c), "text/html")
-            msg.send()
+        c = Context({
+            'user': user.username,
+            'activation_link': user.get_activation_url(),
+            'domain': request.META['HTTP_HOST'],
+            'protocol': 'https' if request.is_secure() else 'http',
+            'STATIC_URL': getattr(settings, 'STATIC_URL')
+        })
+        msg = EmailMultiAlternatives(_('Welcome to Khooosh'), txt.render(c), 'info@khooosh.com', [user.email, ])
+        msg.attach_alternative(html.render(c), "text/html")
+        msg.send()
 
-            messages.success(request, _(
-                'Congratulations, you are now a member of Khooosh, '
-                'please check your email to activate your account.'))
+        messages.success(request, _(
+            'Congratulations, you are now a member of Khooosh, '
+            'please check your email to activate your account.'))
 
 
 def social_extra_data(backend, details, response, social_user, uid, user, *args, **kwargs):

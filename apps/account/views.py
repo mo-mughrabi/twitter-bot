@@ -68,6 +68,7 @@ class CompleteProfile(View):
         username = ''
         avatar = ''
         email = ''
+
         backend = request.session[name]['backend']
         kwargs = request.session[name]['kwargs']
         if backend == 'twitter':
@@ -108,7 +109,6 @@ class CompleteProfile(View):
     def post(self, request):
         name = getattr(settings, 'SOCIAL_AUTH_PARTIAL_PIPELINE_KEY', 'partial_pipeline')
         full_name = ''
-        username = ''
         avatar = ''
         email = ''
         if name not in request.session:
@@ -120,20 +120,6 @@ class CompleteProfile(View):
             full_name = kwargs.get('details', '').get('fullname', '')
             username = kwargs.get('details', '').get('username', '')
             avatar = kwargs.get('response', None).get('profile_image_url_https', None)
-        elif backend == 'facebook':
-            email = kwargs.get('details', '').get('email', '')
-            full_name = kwargs.get('details', '').get('fullname', '')
-            username = kwargs.get('details', '').get('username', '')
-            avatar = graph_fb_profile_image(kwargs.get('response', None).get('id', None))
-        elif backend == 'linkedin':
-            email = kwargs.get('details', '').get('email', '')
-            full_name = kwargs.get('details', '').get('fullname', '')
-            username = kwargs.get('details', '').get('username', '')
-            avatar = kwargs.get('response', None).get('picture-url', None)
-        elif backend == 'instagram':
-            full_name = kwargs.get('details', '').get('first_name', '')
-            username = kwargs.get('details', '').get('username', '')
-            avatar = kwargs.get('response', None).get('data').get('profile_picture', None)
 
         initial_context = {}
         if email not in ('', u'', None):
@@ -144,11 +130,9 @@ class CompleteProfile(View):
             cleaned_data = form.cleaned_data
             request.session['saved_full_name'] = cleaned_data.get('full_name')
             request.session['saved_email'] = cleaned_data.get('email')
-            request.session['saved_username'] = cleaned_data.get('username')
-            request.session['saved_interests'] = cleaned_data.get('interests')
             request.session['saved_join_mail_list'] = cleaned_data.get('join_mailing_list')
             return redirect('socialauth_complete', backend=backend)
-
+        print 'am here '
         return render(request, self.template_name,
                 {'form': form,
                 'backend': backend,

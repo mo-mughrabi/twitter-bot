@@ -43,7 +43,12 @@
                 <li><a href="#about">{% trans 'About' %}</a></li>
               </ul>
               <ul class="nav navbar-nav pull-right">
-                <li class="active"><a href="{% url 'account-signup' %}">{% trans 'Sign up' %}</a></li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="active"><a href="{% url 'account-logout' %}">{% trans 'Sign out' %}</a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'account-signup' %}">{% trans 'Sign up' %}</a></li>
+                {% endif %}
               </ul>
             </div>
 

@@ -30,6 +30,9 @@ class SocialForm(forms.Form):
 
         self.fields['email'].error_messages.update({'required': _('Email field is required')})
 
+        self.fields['email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['full_name'].widget.attrs.update({'class': 'form-control'})
+
     def all_fields(self):
         return [field for field in self if not field.is_hidden and field.name not in ('terms', 'join_mailing_list')]
 
