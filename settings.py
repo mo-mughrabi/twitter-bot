@@ -167,7 +167,7 @@ try:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATICFILES_STORAGE = 'libs.storage.S3StaticBucket'
+    STATICFILES_STORAGE = 'storage.S3StaticBucket'
 except :
     pass
 
