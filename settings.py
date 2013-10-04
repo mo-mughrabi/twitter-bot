@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'storages',
     'south',
     'social_auth',
+    'django_ses',
     'apps.dbmanager',
     'apps.account',
     'apps.twitter',
@@ -187,12 +188,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # authentication backends
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    'social_auth.backends.contrib.instagram.InstagramBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -225,6 +220,9 @@ SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', '')
 TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', '')
+
+# email settings - django-ses
+EMAIL_BACKEND = 'django_ses.SESBackend'
 
 try:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STATIC_STORAGE_BUCKET_NAME')

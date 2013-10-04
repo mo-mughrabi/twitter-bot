@@ -6,7 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^', include('apps.twitter.urls')),
+
+    url(r'^', include('apps.pages.urls')),
+    url(r'^twitter/', include('apps.twitter.urls')),
     url(r'^account/', include('apps.account.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

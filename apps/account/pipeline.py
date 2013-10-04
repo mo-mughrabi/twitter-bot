@@ -57,7 +57,7 @@ def set_username(request, *args, **kwargs):
         username = kwargs['user'].username
     else:
         user = User.objects.all().order_by("-id")[0]
-        username = 'auto%s' % str(user.id)
+        username = 'auto%s' % str(user.id + 1)
     return {'username': username}
 
 
@@ -78,7 +78,8 @@ def set_user_details(request, *args, **kwargs):
             'protocol': 'https' if request.is_secure() else 'http',
             'STATIC_URL': getattr(settings, 'STATIC_URL')
         })
-        msg = EmailMultiAlternatives(_('Welcome to Khooosh'), txt.render(c), 'info@khooosh.com', [user.email, ])
+        msg = EmailMultiAlternatives(_('Welcome to Twit Robo'), txt.render(c), 'info@twit-robo.mocorner.com',
+                                     [user.email, ])
         msg.attach_alternative(html.render(c), "text/html")
         msg.send()
 
