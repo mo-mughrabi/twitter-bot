@@ -9,7 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^', include('apps.pages.urls')),
     url(r'^twitter/', include('apps.twitter.urls')),
-    url(r'^account/', include('apps.account.urls')),
+    url(r'^account(s)?/', include('apps.account.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View, TemplateResponseMixin
@@ -53,6 +53,13 @@ class Verify(View):
         except EmailConfirmation.DoesNotExist as e:
             messages.error(request, _('The activation link you are trying to use is invalid.'))
             return redirect(reverse('home'))
+
+
+class Profile(View):
+    """ """
+
+    def get(self, request):
+        return HttpResponse('xxx')
 
 
 class CompleteProfile(View):
@@ -132,7 +139,7 @@ class CompleteProfile(View):
             request.session['saved_email'] = cleaned_data.get('email')
             request.session['saved_join_mail_list'] = cleaned_data.get('join_mailing_list')
             return redirect('socialauth_complete', backend=backend)
-        print 'am here '
+
         return render(request, self.template_name,
                 {'form': form,
                 'backend': backend,

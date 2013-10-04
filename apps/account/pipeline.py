@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-import ast
-from django.core import serializers
-from django.db import transaction
-import re
-import json
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
@@ -12,8 +7,6 @@ from django.template import Context
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
-from social_auth.backends.contrib.linkedin import LinkedinBackend
-from social_auth.backends.facebook import FacebookBackend
 from social_auth.db.django_models import UserSocialAuth
 from social_auth.exceptions import AuthAlreadyAssociated
 from exceptions import AuthAccountSuspended
@@ -66,6 +59,7 @@ def set_user_details(request, *args, **kwargs):
     if kwargs['is_new']:
         user = kwargs['user']
         user.email = request.session.get('saved_email')
+        user.full_name = request.session.get('saved_full_name')
         user.save()
 
         html = get_template('account/email_templates/new_register.html')
@@ -91,13 +85,18 @@ def set_user_details(request, *args, **kwargs):
 def social_extra_data(backend, details, response, social_user, uid, user, *args, **kwargs):
     """
     """
+
     if social_user.provider == 'twitter':
         """ populate extra data for twitter users """
         try:
             tw_user = TwitterExtra.objects.get(user=user)
         except TwitterExtra.DoesNotExist:
+            import urlparse
+            tokens = urlparse.parse_qs(response.get('access_token'))
             TwitterExtra.objects.create(
                 user=user,
+                access_token=tokens['oauth_token'][0],
+                access_token_secret=tokens['oauth_token_secret'][0],
                 screen_name=response.get('screen_name'),
                 response=response,
             )

@@ -28,7 +28,9 @@
               <ul class="nav navbar-nav pull-right">
 
                 {% if request.user.is_authenticated %}
-                    <li class="active"><a href="{% url 'account-logout' %}">{% trans 'Sign out' %}</a></li>
+                    <li><a href="{% url 'account-profile' %}">{% trans 'Profile' %}</a></li>
+                    <li><a href="">{% trans 'Twitter Robo' %}</a></li>
+                    <li><a href="{% url 'account-logout' %}">{% trans 'Sign out' %}</a></li>
                 {% else %}
                     <li class="active"><a href="{% url 'account-signup' %}">{% trans 'Sign up' %}</a></li>
                 {% endif %}
