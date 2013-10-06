@@ -4,9 +4,9 @@
 {% block centraal_content %}
         <div class="row">
             <div class="col-lg-offset-4 col-lg-5">
-
+                <a class="btn pull-right" href="#">{% trans 'Delete account' %}</a>
+                <h2>{% trans 'Update your profile' %}</h2>
                 <hr />
-
 
                 {% if form.errors %}
                     <div class="alert alert-danger">
@@ -31,24 +31,10 @@
                         </div>
 
                     {% endfor %}
-                    <div class="form-group">
-                        {{ form.terms }}
-                        <label for="id_{{form.terms.name}}" class="choice">
-                            {{ form.terms.label }}
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.join_mailing_list }}
-                        <label for="id_{{form.join_mailing_list.name}}" class="choice">
-                            {{ form.join_mailing_list.label }}
-                        </label>
-                    </div>
 
                      <div class="form-group">
-                         <button class="btn btn-primary btn-lg pull-right" type="submit">{% trans 'Register' %}</button>
+                         <button class="btn btn-primary btn-lg pull-right" type="submit">{% trans 'Update' %}</button>
                      </div>
-
                 </form>
             </div>
         </div>

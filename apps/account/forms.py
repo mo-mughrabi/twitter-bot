@@ -7,6 +7,55 @@ from django.utils.translation import ugettext_lazy as _, get_language
 from apps.account.models import User
 
 
+class EditProfileForm(forms.ModelForm):
+    """
+    EditProfileForm
+
+    """
+
+    class Meta:
+        model = User
+        fields = ('full_name', 'gender', 'join_mailing_list', )
+
+        widgets = {
+            'full_name': forms.TextInput(attrs={'required': '', 'class': 'input-xxlarge'}),
+        }
+        field_args = {
+            'full_name': {
+                'error_messages': {
+                    'required': _('Full name is required')
+                }
+            },
+            'username': {
+                'error_messages': {
+                    'required': _('Username address is required')
+                },
+                'help_text': ''
+            },
+        }
+
+    def __init__(self, *args, **kwargs):
+
+        if 'request' in kwargs:
+            self.request = kwargs.get('request')
+            kwargs.pop('request')
+
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+
+        # required fields to over-ride model
+        self.fields['full_name'].required = True
+
+        self.fields['full_name'].widget.attrs.update({'class': 'form-control'})
+
+
+    def all_fields(self):
+        return [field for field in self if not field.is_hidden and field.name not in ('terms', 'captcha')]
+
+    def clean(self):
+        cleaned_data = super(EditProfileForm, self).clean()
+        return cleaned_data
+
+
 class SocialForm(forms.Form):
     """
 

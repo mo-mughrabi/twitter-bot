@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View, TemplateResponseMixin
 from django.contrib.auth import logout as django_logout
-from forms import SocialForm
+from forms import SocialForm, EditProfileForm
 from models import EmailConfirmation, User
 from django.utils.translation import ugettext_lazy as _, get_language
 
@@ -57,9 +57,11 @@ class Verify(View):
 
 class Profile(View):
     """ """
+    template_name = 'account/profile.html'
 
     def get(self, request):
-        return HttpResponse('xxx')
+        form = EditProfileForm(instance=request.user)
+        return render(request, self.template_name, {'form': form})
 
 
 class CompleteProfile(View):
