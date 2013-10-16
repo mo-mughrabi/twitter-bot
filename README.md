@@ -21,7 +21,7 @@ To be written on last day
 
 Contributors
 -----
-    * Mo Mughrabi
-    * Mariusz Kosakowski
+    * Mo Mughrabi - Lead developer
+    * Mariusz Kosakowski - Developer
 
 
