@@ -24,7 +24,48 @@
 	<title>{%block title %}Twitter bot{%endblock%}</title>
 </head>
 <body>
-    {% block navbar %}{% endblock %}
+    {% block navbar %}
+
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'home' %}">{% trans 'Twit Robo' %}</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">{% trans 'Tour' %}</a></li>
+                <li><a href="#about">{% trans 'About' %}</a></li>
+                <li><a href="#contact">{% trans 'Contact me' %}</a></li>
+                <li><a href="#tell-a-friend">{% trans 'Tell friends' %}</a></li>
+              </ul>
+              <ul class="nav navbar-nav pull-right">
+
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'account-profile' %}">{% trans 'Profile' %}</a></li>
+                    <li><a href="{% url 'twitter-home' %}">{% trans 'Twitter Robo' %}</a></li>
+                    <li><a href="{% url 'account-logout' %}">{% trans 'Sign out' %}</a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'account-signup' %}">{% trans 'Sign up' %}</a></li>
+                {% endif %}
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% endblock %}
 
     {% block carousel %}{% endblock %}
     <div class="container {% block container_css %}{% endblock %}">
