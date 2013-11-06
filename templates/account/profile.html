@@ -4,6 +4,13 @@
 {% block centraal_content %}
         <div class="row">
             <div class="col-lg-offset-4 col-lg-5">
+                {% if messages %}
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <a class="btn pull-right" href="#">{% trans 'Delete account' %}</a>
                 <h2>{% trans 'Update your profile' %}</h2>
                 <hr />

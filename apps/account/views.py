@@ -11,6 +11,7 @@ from django.contrib.auth import logout as django_logout
 from forms import SocialForm, EditProfileForm
 from models import EmailConfirmation, User
 from django.utils.translation import ugettext_lazy as _, get_language
+from django.contrib import messages
 
 
 class Signup(View):
@@ -63,6 +64,18 @@ class Profile(View):
         form = EditProfileForm(instance=request.user)
         return render(request, self.template_name, {'form': form})
 
+    def post(self, request):
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.info(request,"Your profile has been successfully updated!")
+        return render(request, self.template_name, {'form': form})
+
+    #def delFunction(self, request):
+    #    user = User.objects.get(id=request.GET['id'])
+    #    if user:
+    #        messages.info(request, "Are you sure you want to remove user?")
+    #    user.delete()
 
 class CompleteProfile(View):
     """
