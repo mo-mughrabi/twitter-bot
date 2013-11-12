@@ -71,11 +71,23 @@ class Profile(View):
             messages.info(request,"Your profile has been successfully updated!")
         return render(request, self.template_name, {'form': form})
 
-    #def delFunction(self, request):
-    #    user = User.objects.get(id=request.GET['id'])
-    #    if user:
-    #        messages.info(request, "Are you sure you want to remove user?")
-    #    user.delete()
+
+
+class DeleteView(View):
+    template_name = "account/confirmation_page.html"
+
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
+        return render(request, self.template_name, {
+            'message': 'Are you sure you want to delete user %s' % user.username
+        })
+
+    def post(self, request, pk):
+        user = User.objects.get(pk=pk)
+        user.delete()
+        django_logout(request)
+        return redirect(reverse('home'))
+
 
 class CompleteProfile(View):
     """
