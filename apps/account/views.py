@@ -74,13 +74,17 @@ class Profile(View):
 
 
 class DeleteView(View):
-    template_name = "account/confirmation_page.html"
+    """
+
+    """
+
+    template_name = 'account/confirmation_page.html'
 
     def get(self, request, pk):
         user = User.objects.get(pk=pk)
         return render(request, self.template_name, {
             'message': 'Are you sure you want to delete user %s' % user.username
-        })
+        },)
 
     def post(self, request, pk):
         user = User.objects.get(pk=pk)

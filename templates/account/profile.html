@@ -11,7 +11,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <a class="btn pull-right" href="#">{% trans 'Delete account' %}</a>
+                <a class="btn pull-right" href="{% url 'account-delete-user' %}">{% trans 'Delete account' %}</a>
                 <h2>{% trans 'Update your profile' %}</h2>
                 <hr />
 
