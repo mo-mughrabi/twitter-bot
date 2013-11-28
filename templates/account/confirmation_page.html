@@ -4,22 +4,15 @@
 {% block centraal_content %}
         <div class="row">
             <div class="col-lg-offset-4 col-lg-5">
-                <form class="form" role="form" method="POST">
+                 {% block content %}
+                    <h1>Delete site</h1>
+                    <p>Are you sure you want to delete user {{ user.id }}?</p>
+                    <form action="./" method="POST">
                     {% csrf_token %}
-                    {% for field in form.all_fields %}
-
-                        <div class="form-group">
-                            {{ field.label_tag }}
-                            {{ field }}
-                        </div>
-
-                    {% endfor %}
-
-                    <div class="form-group">
-                         <button class="btn btn-primary btn-lg pull-right" type="submit">{% trans 'Register' %}</button>
-                    </div>
-
+                    <input type="submit" value="Yes, delete" />
+                    <a href="{% url 'account-profile' %}">No, cancel.</a>
                 </form>
+                {% endblock %}
             </div>
         </div>
 {% endblock %}

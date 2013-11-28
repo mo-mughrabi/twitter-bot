@@ -12,6 +12,7 @@ from forms import SocialForm, EditProfileForm
 from models import EmailConfirmation, User
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.contrib import messages
+from django.views.generic import DeleteView
 
 
 class Signup(View):
@@ -73,11 +74,11 @@ class Profile(View):
 
 
 
-class DeleteView(View):
+class DeleteView(DeleteView):
     """
 
     """
-
+    model = User
     template_name = 'account/confirmation_page.html'
 
     def get(self, request, pk):
