@@ -9,8 +9,8 @@
                     <p>Are you sure you want to delete user {{ user.id }}?</p>
                     <form action="./" method="POST">
                     {% csrf_token %}
-                    <input type="submit" value="Yes, delete" />
-                    <a href="{% url 'account-profile' %}">No, cancel.</a>
+                    <button class="btn btn-danger" type="submit">Yes, delete</button>
+                    <a class="btn btn-default" href="{% url 'account-profile' %}">No, cancel</a>
                 </form>
                 {% endblock %}
             </div>
