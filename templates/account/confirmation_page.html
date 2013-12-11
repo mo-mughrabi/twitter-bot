@@ -10,12 +10,12 @@
         <div class="row">
             <div class="col-lg-offset-4 col-lg-5">
                  {% block content %}
-                    <h1>Delete site</h1>
-                    <p>Are you sure you want to delete user {{ user.id }}?</p>
+                    <h1>{% trans 'Delete site' %}</h1>
+                    <p>{% trans 'Are you sure you want to delete user?' %}</p>
                     <form action="./" method="POST">
                     {% csrf_token %}
-                    <button class="btn btn-danger" type="submit">Yes, delete</button>
-                    <a class="btn btn-default" href="{% url 'account-profile' %}">No, cancel</a>
+                    <button class="btn btn-danger" type="submit">{% trans 'Yes, delete' %}</button>
+                    <a class="btn btn-default" href="{% url 'account-profile' %}">{% trans 'No, cancel' %}</a>
                 </form>
                 {% endblock %}
             </div>
