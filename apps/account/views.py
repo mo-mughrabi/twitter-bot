@@ -20,8 +20,10 @@ class Signup(View):
     template_name = 'account/signup.html'
 
     def get(self, request):
-
-        return render(request, self.template_name, {})
+        if request.user.is_authenticated():
+            return redirect(reverse('home'))
+        else:
+            return render(request, self.template_name, {})
 
 
 class Logout(View):
