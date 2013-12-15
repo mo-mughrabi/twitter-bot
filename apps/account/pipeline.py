@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages

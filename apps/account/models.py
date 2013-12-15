@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from binascii import hexlify
 from django.db.models.signals import post_syncdb
 import os

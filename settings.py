@@ -134,7 +134,7 @@ INSTALLED_APPS = (
     'south',
     'social_auth',
     'django_ses',
-    'apps.dbmanager',
+    'apps.extras',
     'apps.account',
     'apps.twitter',
 )
