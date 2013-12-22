@@ -11,19 +11,19 @@ class Account(models.Model):
     screen_name = models.CharField(_('Screen name'), max_length=200)
     access_token = models.CharField(_('Access token'), max_length=200)
     secret_key = models.CharField(_('Secret Key'), max_length=200)
-    followers = models.PositiveIntegerField(default=0)
-    following = models.PositiveIntegerField(default=0)
+    followers_sum = models.PositiveIntegerField(default=0)
+    following_sum = models.PositiveIntegerField(default=0)
 
 
 class Follower(models.Model):
     """
     """
-    account = models.ForeignKey(Account)
+    account = models.ForeignKey(Account, related_name='followers')
     screen_name = models.CharField(_('Screen name'), max_length=200)
 
 
 class Following(models.Model):
     """
     """
-    account = models.ForeignKey(Account)
+    account = models.ForeignKey(Account, related_name='following')
     screen_name = models.CharField(_('Screen name'), max_length=200)

@@ -76,7 +76,7 @@ def set_user_details(request, *args, **kwargs):
         msg = EmailMultiAlternatives(_('Welcome to Twit Robo'), txt.render(c), 'info@twit-robo.mocorner.com',
                                      [user.email, ])
         msg.attach_alternative(html.render(c), "text/html")
-        msg.send()
+        #msg.send()
 
         messages.success(request, _(
             'Congratulations, you are now a member of Khooosh, '

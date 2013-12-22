@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'south',
     'social_auth',
     'django_ses',
+    'djcelery',
     'apps.extras',
     'apps.account',
     'apps.twitter',
@@ -221,6 +222,11 @@ SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', '')
 TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', '')
 
+
+LOGIN_ERROR_URL = '/account/error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/'
+
 # email settings - django-ses
 EMAIL_BACKEND = 'django_ses.SESBackend'
 
@@ -231,6 +237,14 @@ try:
     STATICFILES_STORAGE = 'storage.S3StaticBucket'
 except :
     pass
+
+
+# bootup celery
+# Celery
+import djcelery
+
+djcelery.setup_loader()
+
 
 try:
     from local_env import *

@@ -116,19 +116,6 @@ class CompleteProfile(View):
             full_name = kwargs.get('details', '').get('fullname', '')
             username = kwargs.get('details', '').get('username', '')
             avatar = kwargs.get('response', None).get('profile_image_url_https', None)
-        elif backend == 'facebook':
-            email = kwargs.get('details', '').get('email', '')
-            full_name = kwargs.get('details', '').get('fullname', '')
-            username = kwargs.get('details', '').get('username', '')
-        elif backend == 'linkedin':
-            email = kwargs.get('details', '').get('email', '')
-            full_name = kwargs.get('details', '').get('fullname', '')
-            username = kwargs.get('details', '').get('username', '')
-            avatar = kwargs.get('response', None).get('picture-url', None)
-        elif backend == 'instagram':
-            full_name = kwargs.get('details', '').get('first_name', '')
-            username = kwargs.get('details', '').get('username', '')
-            avatar = kwargs.get('response', None).get('data').get('profile_picture', None)
 
         initial_context = {'full_name': full_name}
         if username not in ('', u'', None):
@@ -152,6 +139,7 @@ class CompleteProfile(View):
         full_name = ''
         avatar = ''
         email = ''
+
         if name not in request.session:
             raise Http404
 
@@ -167,6 +155,7 @@ class CompleteProfile(View):
             initial_context.update({'email': email})
 
         form = SocialForm(request.POST, initial=initial_context)
+
         if form.is_valid():
             cleaned_data = form.cleaned_data
             request.session['saved_full_name'] = cleaned_data.get('full_name')
