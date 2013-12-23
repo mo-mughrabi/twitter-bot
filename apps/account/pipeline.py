@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.template import Context
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext as _
 from social_auth.db.django_models import UserSocialAuth
 from social_auth.exceptions import AuthAlreadyAssociated
 from exceptions import AuthAccountSuspended
@@ -76,11 +76,9 @@ def set_user_details(request, *args, **kwargs):
         msg = EmailMultiAlternatives(_('Welcome to Twit Robo'), txt.render(c), 'info@twit-robo.mocorner.com',
                                      [user.email, ])
         msg.attach_alternative(html.render(c), "text/html")
+        # uncomment below to allow sending outgoing emails
         #msg.send()
-
-        messages.success(request, _(
-            'Congratulations, you are now a member of Khooosh, '
-            'please check your email to activate your account.'))
+        messages.success(request, _('Welcome to Twitbot'))
 
 
 def social_extra_data(backend, details, response, social_user, uid, user, *args, **kwargs):
@@ -107,7 +105,6 @@ def update_email_validity(backend, details, response, user=None, is_new=False, *
     """ """
     if user is None:
         return
-
     social_user = kwargs['social_user']
     # below functionality, will first check if email is valid and has record in emailconfirmation model
     # if no record found, it will create one
