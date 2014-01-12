@@ -23,6 +23,10 @@
             </ul>
         </div>
         <div class="col-md-9">Here is center area</div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Follow back" />
+        </form>
     </div>
     </div>
 {% endblock %}
