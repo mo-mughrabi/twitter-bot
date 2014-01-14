@@ -27,7 +27,7 @@ def run_operations():
     """
     logger.info('Run operations is starting up')
 
-    for job in Operation.objects.filter(status='P')[:10]:
+    for job in Operation.objects.filter(status='P')[:20]:
         job.run_operation()
         job.status = 'C'
         job.save()
@@ -42,7 +42,7 @@ def follow_back(account_id):
         account = Account.objects.get(pk=account_id)
         auth.set_access_token(account.access_token, account.secret_key)
         api = tweepy.API(auth)
-        user = api.me()
+        #user = api.me()
 
         follower_ids = []
         for follower in tweepy.Cursor(api.followers).items():
@@ -58,14 +58,13 @@ def follow_back(account_id):
             Operation.objects.create(user=account, func='follow_user', args='{},'.format(follower))
         return u'Success'
 
-#Stwórz nową metodę i task dla unfollow
 @task()
 def unfollow(account_id):
         auth = OAuthHandler(getattr(settings, 'TWITTER_CONSUMER_KEY'), getattr(settings, 'TWITTER_CONSUMER_SECRET'))
         account = Account.objects.get(pk=account_id)
         auth.set_access_token(account.access_token, account.secret_key)
         api = tweepy.API(auth)
-        user = api.me()
+        #user = api.me()
 
         follower_ids = []
         for follower in tweepy.Cursor(api.followers).items():

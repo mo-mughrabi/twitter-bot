@@ -57,7 +57,7 @@ class Operation(models.Model):
         auth = OAuthHandler(getattr(settings, 'TWITTER_CONSUMER_KEY'), getattr(settings, 'TWITTER_CONSUMER_SECRET'))
         auth.set_access_token(self.user.access_token, self.user.secret_key)
         api = tweepy.API(auth)
-        user = api.me()
+        #user = api.me()
         try:
             args = self.args.split(',')
         except :
