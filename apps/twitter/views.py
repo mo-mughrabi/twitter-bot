@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View, TemplateResponseMixin
 from pytz import utc
 from tasks import follow_back
+from tasks import unfollow
 from models import Account
 
 
@@ -17,5 +18,8 @@ class Home(View):
 
     def post(self, request):
         account = Account.objects.get(user=request.user)
-        follow_back.delay(account.id,)
+        if request.POST['form-type'] == u'Follow back':
+            follow_back.delay(account.id,)
+        else:
+            unfollow.delay(account.id,)
         return render(request, self.template_name, {})

@@ -17,15 +17,27 @@
                 <li><a href="#">Left navigation 9</a></li>
                 <li><a href="#">Left navigation 10</a></li>
                 <li><a href="#">Left navigation 11</a></li>
-                <li><a href="#">Left navigation 12</a></li>
-                <li><a href="#">Left navigation 13</a></li>
-                <li><a href="#">Left navigation 14</a></li>
+                <li><a data-toggle="tooltip" title="first tooltip" href="#">Left navigation 12</a></li>
             </ul>
         </div>
-        <div class="col-md-9">Here is center area</div>
-        <form method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Follow back" />
+        <form method="POST">{% csrf_token %}
+        <div class="col-md-9">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                Following options<span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a data-toggle="tooltip" title="Follow back" href="#" type="submit">Follow back</a>
+                </li>
+                <li>
+                    <form method="POST">
+                        <a data-toggle="tooltip" title="Unfollow" href="#" type="submit">Unfollow</a>
+                    </form>
+                </li>
+              </ul>
+            </div>
+        </div>
         </form>
     </div>
     </div>

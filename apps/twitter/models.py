@@ -42,7 +42,7 @@ class Operation(models.Model):
     )
     FUNCTIONS = (
         ('follow_user', 'Follow user'),
-        ('unfollow_user', 'unFollow user'),
+        ('unfollow_user', 'Unfollow user'),
     )
     perform_at = models.DateTimeField(auto_now_add=True)
     performed_at = models.DateTimeField(null=True, blank=True)
@@ -65,6 +65,6 @@ class Operation(models.Model):
             raise
         if self.func == 'follow_user':
             tweepy.Cursor(api.create_friendship(args[0]))
-        #if self.func == 'unfollow_user':
-        #    tweepy.Cursor(api.destroy_friendship(args[0]))
+        if self.func == 'unfollow_user':
+            tweepy.Cursor(api.destroy_friendship(args[0]))
 
