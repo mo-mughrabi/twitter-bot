@@ -4,16 +4,18 @@ from celery.contrib.methods import task
 from celery import task
 from celery.schedules import crontab
 from celery.task import periodic_task
+import datetime
 from django.conf import settings
 from django.db import IntegrityError
 from django.db.models import get_model
 from celery.utils.log import get_task_logger
-from apps.twitter.models import Operation
+from apps.twitter.models import Operation, Hashtag
 
 logger = get_task_logger(__name__)
 import tweepy
 from tweepy import OAuthHandler
 from models import Account
+import time
 
 
 def get_diff(list1,list2):
@@ -77,5 +79,28 @@ def unfollow(account_id):
         unfollow_list = get_diff(friend_ids, follower_ids)
 
         for follower in unfollow_list:
-            Operation.objects.create(user=account, func='follow_user', args='{},'.format(follower))
+            Operation.objects.create(user=account, func='unfollow_user', args='{},'.format(follower))
         return u'Success'
+
+
+@periodic_task(run_every=crontab(minute="*/5"))
+def hashtags():
+    # you have to retreive hastags that last retrieved 2 hours ago
+    for hashtag in Hashtag.objects.filter(last_time_sync__lt=''):  # aggregate by hashtag
+        account = hashtag.created_user
+        auth = OAuthHandler(getattr(settings, 'TWITTER_CONSUMER_KEY'), getattr(settings, 'TWITTER_CONSUMER_SECRET'))
+        auth.set_access_token(account.access_token, account.secret_key)
+        api = tweepy.API(auth)
+        #user = api.me()
+        results = api.search(q=hashtag.hash_tag_key)
+        # sleep
+
+        for result in results:
+            if hashtag.retweet_or_favourite == 'R':
+                Operation.objects.create(user=account, func='rewteet', args='{},'.format(result.id))
+            else:
+                Operation.objects.create(user=account, func='fav', args='{},'.format(result.id))
+        hashtag.last_time_sync = datetime.datetime.now()
+        hashtag.save()
+        time.sleep(10)
+    return u'Success'

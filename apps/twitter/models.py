@@ -33,6 +33,33 @@ class Following(models.Model):
     screen_name = models.CharField(_('Screen name'), max_length=200)
 
 
+class Hashtag(models.Model):
+    """ you will write a model to hold
+    1. name hash tag key - slug
+    2. last time of sync - timedate
+    3. user who created the hashtag - foreign key with user
+    4. number of times it retweeted/favirate - integer
+    4. operation (retweet or favirate) - char field with choice
+
+    ./manage.py sql twitter
+    ./manage.py schemamigration twitter --auto
+    ./manage.py migrate twitter
+    """
+
+    #models.SlugField() # this won't allow special characters #(**#$*
+    FUNCTIONS = (
+        ('R', 'Retweet'),
+        ('F', 'Favourites'),
+    )
+
+    hash_tag_key = models.SlugField()
+    last_time_sync = models.DateTimeField(auto_now_add=True)
+    created_user = models.ForeignKey(Account, related_name='created_user')
+    number_retweet_or_favourite = models.IntegerField(default=0)
+    retweet_or_favourite = models.CharField(_('Retweet or favourites'), max_length=10,
+                                            choices=FUNCTIONS, default='R')
+
+
 class Operation(models.Model):
     """
     """
@@ -43,6 +70,8 @@ class Operation(models.Model):
     FUNCTIONS = (
         ('follow_user', 'Follow user'),
         ('unfollow_user', 'Unfollow user'),
+        ('retweet', 'Retweet'),
+        ('favourite', 'Favourite'),
     )
     perform_at = models.DateTimeField(auto_now_add=True)
     performed_at = models.DateTimeField(null=True, blank=True)
@@ -64,7 +93,11 @@ class Operation(models.Model):
             # handle if args is a single argument or none
             raise
         if self.func == 'follow_user':
-            tweepy.Cursor(api.create_friendship(args[0]))
+            api.create_friendship(args[0])
         if self.func == 'unfollow_user':
-            tweepy.Cursor(api.destroy_friendship(args[0]))
+            api.destroy_friendship(args[0])
+        if self.func == 'retweet':
+            api.retweet(args[0])
+        if self.func == 'favourite':
+            api.create_favorite(args[0])
 

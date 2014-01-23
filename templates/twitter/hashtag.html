@@ -1,0 +1,73 @@
+{# TODO: Build twitter index page, it should be a panel page where user can see a left navigation and center area #}
+{% extends "base.html" %}
+
+
+{% block centraal_content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            {% include 'navigation.html' %}
+
+        </div>
+        <div class="col-md-10">
+            <form role="form" method="POST">
+                {% csrf_token %}
+                {{form}}
+            </form>
+        <table class="table table-striped">
+
+            <tr>
+                {% if messages %}
+                <td>
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                </td>
+                {% endif %}
+            </tr>
+
+            <tr>
+                <td>Hash name</td>
+                <td>Last time of sync</td>
+                <td>Number of retweet/favourites</td>
+                <td>Retweet/Favourites</td>
+            </tr>
+
+        {% for hashtag in hashtags %}
+            <tr>
+                <td>{{ hashtag.hash_tag_key }}</td>
+                <td>{{ hashtag.last_time_sync }}</td>
+                <td>{{ hashtag.number_retweet_or_favourite }}</td>
+                <td>{{ hashtag.get_retweet_or_favourite_display }}</td>
+            </tr>
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if hashtags.has_previous %}
+                    <a href="?page={{ hashtags.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ hashtags.number }} of {{ hashtags.paginator.num_pages }}.
+                </span>
+
+                {% if hashtags.has_next %}
+                    <a href="?page={{ hashtags.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+
+        </table>
+        </div>
+
+
+
+
+
+
+    </div>
+    </div>
+{% endblock %}
